@@ -1,5 +1,8 @@
 const int trigPin = 11;
 const int echoPin = 12;
+const int ledGreenPin = 6;
+const int ledRedPin = 7;
+
 long duration;
 double distanceCm, distanceInch;
 const double R1 = 0.01886204;
@@ -9,6 +12,9 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+  pinMode(ledGreenPin, OUTPUT);
+  pinMode(ledRedPin, OUTPUT);
+
   Serial.begin(9600);
 
 
@@ -32,5 +38,13 @@ void loop() {
   Serial.print(distanceInch);
   Serial.println(" in");
   delay(1000);
+
+  if (distanceInch < 5) {
+    digitalWrite(ledGreenPin, HIGH);
+    digitalWrite(ledRedPin, LOW);
+  } else {
+    digitalWrite(ledGreenPin, LOW);
+    digitalWrite(ledRedPin, HIGH);
+  }
 
 }
