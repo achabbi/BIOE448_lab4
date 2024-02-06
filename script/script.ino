@@ -1,7 +1,9 @@
-const int trigPin = 1;
-const int echoPin = 0;
+const int trigPin = 11;
+const int echoPin = 12;
 long duration;
-int distanceCm, distanceInch;
+double distanceCm, distanceInch;
+const double R1 = 0.01886204;
+const double R2 = 0.007426;
 
 void setup() {
   // put your setup code here, to run once:
@@ -21,5 +23,14 @@ void loop() {
   digitalWrite(trigPin, LOW);
 
   duration = pulseIn(echoPin, HIGH);
+
+  distanceCm = duration * R1;
+  distanceInch = duration * R2;
+  Serial.print("Distance: ");
+  Serial.print(distanceCm);
+  Serial.print(" cm/");
+  Serial.print(distanceInch);
+  Serial.println(" in");
+  delay(1000);
 
 }
